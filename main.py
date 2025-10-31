@@ -1,9 +1,8 @@
 import random
 
-words = ("apple", "orange", "banana", "coconut", "pineapple")
+words: tuple[str, ...] = ("apple", "orange", "banana", "coconut", "pineapple")
 
-# Dictionary of key:()
-hangman_art = {
+hangman_art: dict[int, tuple[str, str, str]] = {
     0: ("   ", "   ", "   "),
     1: (" o ", "   ", "   "),
     2: (" o ", " | ", "   "),
@@ -14,32 +13,32 @@ hangman_art = {
 }
 
 
-def display_man(wrong_guesses):
+def display_man(wrong_guesses: int) -> None:
     print("------")
     for line in hangman_art[wrong_guesses]:
         print(line)
     print("------")
 
 
-def display_hint(hint):
+def display_hint(hint: list[str]) -> None:
     print(" ".join(hint))
 
 
-def display_answer(answer):
+def display_answer(answer: str) -> None:
     print(" ".join(answer))
 
 
-def main():
-    answer = random.choice(words)
-    hint = ["_"] * len(answer)
-    wrong_guesses = 0
-    guessed_letters = set()
-    is_running = True
+def main() -> None:
+    answer: str = random.choice(words)
+    hint: list[str] = ["_"] * len(answer)
+    wrong_guesses: int = 0
+    guessed_letters: set[str] = set()
+    is_running: bool = True
 
     while is_running:
         display_man(wrong_guesses)
         display_hint(hint)
-        guess = input("Enter a letter: ").lower()
+        guess: str = input("Enter a letter: ").lower()
 
         if len(guess) != 1 or not guess.isalpha():
             print("Invalid input")
